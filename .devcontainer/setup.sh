@@ -1,5 +1,6 @@
 ## update and install some things we should probably have
 apt-get update
+apt-get upgrade
 apt-get install -y \
   curl \
   git \
@@ -9,7 +10,10 @@ apt-get install -y \
   zsh \
   vim \
   build-essential \
-  openssl
+  openssl \
+  pkg-config \
+  libudev-dev \
+  libssl-dev
 
 ## Install rustup and common components
 curl https://sh.rustup.rs -sSf | sh -s -- -y 
@@ -21,6 +25,15 @@ rustup component add clippy --toolchain nightly
 
 cargo install cargo-expand
 cargo install cargo-edit
+
+## install solana
+sh -c "$(curl -sSfL https://release.solana.com/v1.14.12/install)"
+
+## install anchor
+cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+
+avm install latest
+avm use latest
 
 ## setup and install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
